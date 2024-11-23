@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace StarterKit.Common
 {
-    public class PointerEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class PointerEnterExitEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public UnityEvent PointerEnter;
         public UnityEvent PointerExit;

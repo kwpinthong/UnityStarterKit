@@ -34,11 +34,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4173159558554049111, guid: a4f4690c6a81e7f43a34f47ee56dda7b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4173159558554049111, guid: a4f4690c6a81e7f43a34f47ee56dda7b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4173159558554049111, guid: a4f4690c6a81e7f43a34f47ee56dda7b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -98,7 +98,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7812095254501473670, guid: a4f4690c6a81e7f43a34f47ee56dda7b, type: 3}
       propertyPath: m_fontSize
-      value: 24
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7812095254501473670, guid: a4f4690c6a81e7f43a34f47ee56dda7b, type: 3}
       propertyPath: m_fontColor.b
@@ -148,7 +148,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4471850931982434500, guid: 6e515b7a022d94c4086e4798fdbff041, type: 3}
       propertyPath: m_Name
-      value: Button Text
+      value: Button Text v1
       objectReference: {fileID: 0}
     - target: {fileID: 8142233880576856155, guid: 6e515b7a022d94c4086e4798fdbff041, type: 3}
       propertyPath: m_Pivot.x
