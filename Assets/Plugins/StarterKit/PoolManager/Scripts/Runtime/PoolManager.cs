@@ -24,7 +24,13 @@ namespace StarterKit.PoolManagerLib
                 return;
             }
             instance = this;
+            DontDestroyOnLoad(gameObject);
             pools = new List<ObjectPool>();
+        }
+        
+        private void OnDestroy()
+        { 
+            instance = null;
         }
         
         private GameObject ThisGetGameObject(GameObject prefab, bool active, Vector3 position, Quaternion rotation)

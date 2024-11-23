@@ -1,0 +1,4 @@
+{
+	"name": "StarterKit.UIFarmwork.Runtime",
+	"references":[ "StarterKit.FunctionString.Runtime" ]
+}

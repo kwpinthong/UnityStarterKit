@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
-using StarterKit.Editor.Utility;
 using StarterKit.PoolManagerLib;
+#if UNITY_EDITOR
+using StarterKit.Common.Editor;
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.TestTools;
 
 public class PoolManagerTests
 {
+#if UNITY_EDITOR
     [SetUp]
     public void Setup()
     {
@@ -34,4 +37,5 @@ public class PoolManagerTests
         Assert.IsNotNull(createdCapsule);
         Assert.IsTrue(!createdCapsule.activeSelf);
     }
+#endif
 }

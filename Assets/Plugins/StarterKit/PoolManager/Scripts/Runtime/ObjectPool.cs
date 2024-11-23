@@ -33,5 +33,11 @@ namespace StarterKit.PoolManagerLib
             newObj.SetActive(active);
             return newObj;
         }
+
+        public void ClearAll()
+        {
+            foreach (var i in pool)
+                i.gameObject.SetActive(false);
+        }
     }
 }
