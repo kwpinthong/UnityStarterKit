@@ -34,7 +34,11 @@ namespace StarterKit.UIFarmworkLib
             Debug.Log("PostClose");
         }
         
+#if ODIN_INSPECTOR
+        [Sirenix.OdinInspector.Button]
+#else
         [ContextMenu("Open")]
+#endif
         public void Open()
         {
             if (Application.isPlaying)
@@ -54,7 +58,11 @@ namespace StarterKit.UIFarmworkLib
             }
         }
 
+#if ODIN_INSPECTOR
+        [Sirenix.OdinInspector.Button]
+#else
         [ContextMenu("Close")]
+#endif
         public void Close()
         {
             if (Application.isPlaying)
