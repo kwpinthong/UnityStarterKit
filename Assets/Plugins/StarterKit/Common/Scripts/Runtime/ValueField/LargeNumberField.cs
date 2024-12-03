@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace StarterKit.Common.ValueField
 {
-    [CreateAssetMenu(fileName = "LargeNumberField", menuName = "StaterKit/ValueField/LargeNumberField")]
+    [CreateAssetMenu(fileName = "LargeNumberField", menuName = "StarterKit/ValueField/LargeNumberField")]
     public class LargeNumberField : ScriptableObject
     {
         private static readonly string[] customPrefixes = { "K", "M", "B", "T" };
@@ -19,15 +17,15 @@ namespace StarterKit.Common.ValueField
 
         public double Value => ToDouble();
         
-        public void Set(double value)
+        public void Set(double setValue)
         {
-            this.value = value;
+            this.value = setValue;
             Normalize();
         }
         
-        public void Add(double value)
+        public void Add(double addValue)
         {
-            var nextValue = ToDouble() + value;
+            var nextValue = ToDouble() + addValue;
             Set(nextValue);
         }
         

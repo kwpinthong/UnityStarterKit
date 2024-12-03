@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StarterKit.Common.ValueField
 {
-    [CreateAssetMenu(fileName = "IntField", menuName = "StaterKit/ValueField/IntField")]
+    [CreateAssetMenu(fileName = "IntField", menuName = "StarterKit/ValueField/IntField")]
     public class IntField : ScriptableObject
     {
         [SerializeField] private int value;

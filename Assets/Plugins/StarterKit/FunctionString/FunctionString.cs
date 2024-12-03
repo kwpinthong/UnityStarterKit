@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -8,7 +7,6 @@ using Sirenix.OdinInspector;
 #endif
 using StarterKit.AudioManagerLib;
 using StarterKit.FunctionStringLib;
-using StarterKit.PoolManagerLib;
 using UnityEngine;
 
 namespace StarterKit.Common.FunctionStringLib
@@ -163,6 +161,6 @@ namespace StarterKit.Common.FunctionStringLib
             doScale.Run(onComplete);
         }
         
-        private void SendWarning(string key, string message) => Debug.LogWarning($"Function: {key}, {message}");
+        private void SendWarning(string key, string message) => CommonDebug.LogWarning($"Function: {key}, {message}");
     }
 }
