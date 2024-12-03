@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterKit.Common;
 using UnityEngine;
 
 namespace StarterKit.PoolManagerLib
@@ -10,6 +11,8 @@ namespace StarterKit.PoolManagerLib
         
         public static GameObject GetGameObject(GameObject prefab, bool active = true, Vector3 position = default, Quaternion rotation = default)
         {
+            if (instance == null)
+                CreateInstance.Create("PoolManager");
             return instance.ThisGetGameObject(prefab, active, position, rotation);
         }
 
