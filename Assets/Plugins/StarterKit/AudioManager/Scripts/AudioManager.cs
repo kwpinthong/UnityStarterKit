@@ -22,13 +22,33 @@ namespace StarterKit.AudioManagerLib
             instance.ThisPlaySound(soundId);
         }
         
-        public static void SetBGMVolume(float volume) => SetVolume(instance.adioMixerBGMParmName, volume);
+        public static bool IsBGMMute => instance.DoBGMMute;
+        
+        public static bool IsSFXMute => instance.DoSFXMute;
 
-        public static void SetSoundVolume(float volume) => SetVolume(instance.adioMixerSFXParmName, volume);
+        public static void SetBGMVolume(float volume)
+        {
+            instance.BGMVolume = volume;
+            SetVolume(instance.adioMixerBGMParmName, volume);
+        }
 
-        public static void MuteBGM(bool isMute) => SetVolume(instance.adioMixerBGMParmName, isMute ? 0f : instance.BGMVolume);
+        public static void SetSoundVolume(float volume)
+        {
+            instance.SFXVolume = volume;
+            SetVolume(instance.adioMixerSFXParmName, volume);
+        }
 
-        public static void MuteSound(bool isMute) => SetVolume(instance.adioMixerSFXParmName, isMute ? 0f : instance.SFXVolume);
+        public static void MuteBGM(bool isMute)
+        {
+            instance.DoBGMMute = isMute;
+            SetVolume(instance.adioMixerBGMParmName, isMute ? 0f : instance.BGMVolume);
+        }
+
+        public static void MuteSound(bool isMute)
+        {
+            instance.DoSFXMute = isMute;
+            SetVolume(instance.adioMixerSFXParmName, isMute ? 0f : instance.SFXVolume);
+        }
         
         private static void SetVolume(string paramName, float volumeLevel)
         {
@@ -66,10 +86,39 @@ namespace StarterKit.AudioManagerLib
         private AudioSource bgmSource1;
         private AudioSource bgmSource2;
         private List<AudioSource> sfxSources = new List<AudioSource>();
-        
-        private float BGMVolume => PlayerPrefs.GetFloat("StarterKit/AudioManager/BGMVolume", 1f);
-        private float SFXVolume => PlayerPrefs.GetFloat("StarterKit/AudioManager/SFXVolume", 1f);
 
+        private const string PlayerPrefsPath = "StarterKit/AudioManager";
+        private const string BGMVolumeKey = "BGMVolume";
+        private const string SFXVolumeKey = "SFXVolume";
+        private const string DoBGMMuteKey = "DoBGMMute";
+        private const string DoSFXMuteKey = "DoSFXMute";
+
+        private string GetPath(string key) => $"{PlayerPrefsPath}/{key}";
+
+        private float BGMVolume
+        {
+            get => PlayerPrefs.GetFloat(GetPath(BGMVolumeKey), 1f);
+            set => PlayerPrefs.SetFloat(GetPath(BGMVolumeKey), value);
+        }
+        
+        private float SFXVolume
+        {
+            get => PlayerPrefs.GetFloat(GetPath(SFXVolumeKey), 1f);
+            set => PlayerPrefs.SetFloat(GetPath(SFXVolumeKey), value);
+        }
+        
+        private bool DoBGMMute
+        {
+            get => PlayerPrefs.GetInt(GetPath(DoBGMMuteKey), 0) == 1;
+            set => PlayerPrefs.SetInt(GetPath(DoBGMMuteKey), value ? 1 : 0);
+        }
+        
+        private bool DoSFXMute
+        {
+            get => PlayerPrefs.GetInt(GetPath(DoSFXMuteKey), 0) == 1;
+            set => PlayerPrefs.SetInt(GetPath(DoSFXMuteKey), value ? 1 : 0);
+        }
+        
         private void Awake()
         {
             if (instance != null)
@@ -123,6 +172,7 @@ namespace StarterKit.AudioManagerLib
             {
                 source.clip = clip;
                 source.volume = startVolume;
+                source.loop = true;
                 source.Play();
                 DOTween.To(() => source.volume, x => source.volume = x, volume, duration);
             }
