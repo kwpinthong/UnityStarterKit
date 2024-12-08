@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StarterKit.Common.FunctionStringLib
+namespace StarterKit.FunctionStringLib
 {
     /// <summary>
     /// Represents the data required to keep track of a function.

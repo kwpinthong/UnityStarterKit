@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using StarterKit.Common.FunctionStringLib;
+using StarterKit.FunctionStringLib;
 using UnityEngine;
 
 namespace StarterKit.UIFarmworkLib

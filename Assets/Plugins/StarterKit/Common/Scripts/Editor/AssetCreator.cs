@@ -5,8 +5,24 @@ namespace StarterKit.Common.Editor
 {
     public static class AssetCreator
     {
+        private const string resourceFolder = "Resources";
+        private const string starterKitFolder = "StarterKit";
+        private const string prefabsFolder = "Prefabs";
+        
+#if STARTERKIT_PACKAGE_MANAGER
+        // version import with package manager
+        private static string prefabPath = "Packages/unitystarterkit/Prefabs";
+#else
+        // version import with unitypackage
         private static string prefabPath = "Assets/Plugins/StarterKit/Prefabs";
+#endif
+        
         private static string createPath = "Assets/Resources/StarterKit/Prefabs";
+        
+        private static string assetResourcePath => "Assets/Resources";
+        private static string assetResourceStarterKitPath => $"{assetResourcePath}/StarterKit";
+        private static string assetResourceStarterKitPrefabsPath => $"{assetResourceStarterKitPath}/Prefabs";
+        
 
         [MenuItem("StartKit/Create/Function String")]
         public static void CreateFunctionStringPrefabVar() => CreatePrefab("FunctionString");
@@ -29,18 +45,28 @@ namespace StarterKit.Common.Editor
             var prefabInstance = PrefabUtility.InstantiatePrefab(prefab) as GameObject; 
             PrefabUtility.SaveAsPrefabAsset(prefabInstance, $"{createPath}/{prefabName}.prefab");
             Object.DestroyImmediate(prefabInstance);
+            CommonDebug.Log($"Prefab, {prefabName}, created at, {createPath}");
         }
-
+        
         private static void CreatePathIfNotExist()
         {
-            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-                AssetDatabase.CreateFolder("Assets", "Resources");
+            var isResourceExist = AssetDatabase.IsValidFolder(assetResourcePath);
+            var isStarterKitExist = AssetDatabase.IsValidFolder(assetResourceStarterKitPath);
+            var isPrefabsExist = AssetDatabase.IsValidFolder(assetResourceStarterKitPrefabsPath);
+            
+            if (!isResourceExist)
+                CreateFolder("Assets", resourceFolder);
+            
+            if (!isStarterKitExist)
+                CreateFolder(assetResourcePath, starterKitFolder);
+            
+            if (!isPrefabsExist)
+                CreateFolder(assetResourceStarterKitPath, prefabsFolder);
+        }
         
-            if (!AssetDatabase.IsValidFolder("Assets/Resources/StarterKit"))
-                AssetDatabase.CreateFolder("Assets/Resources", "StarterKit");
-        
-            if (!AssetDatabase.IsValidFolder("Assets/Resources/StarterKit/Prefabs"))
-                AssetDatabase.CreateFolder("Assets/Resources/StarterKit", "Prefabs");
+        private static void CreateFolder(string path, string folderName)
+        { 
+            AssetDatabase.CreateFolder(path, folderName);
         }
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5020149433437506829}
   - component: {fileID: 4399276902544185537}
+  - component: {fileID: -9105629627054293799}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -44,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9355832ef8a04e4aba40dee6a168044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
   audioBank: {fileID: 11400000, guid: 4d5149280594c6f47b87d7a609a7fd14, type: 2}
   bgmSource: {fileID: 5547776054927769794, guid: 729e0bccb412117498b53aa5d2135805, type: 3}
   sfxSource: {fileID: 3739253419653456744, guid: 9e37e4592c8c8d14bb1313402dc6b6eb, type: 3}
@@ -51,3 +53,11 @@ MonoBehaviour:
   adioMixerBGMParmName: BGM
   adioMixerSFXParmName: SFX
   bgmCrossFadeDuration: 1
+--- !u!81 &-9105629627054293799
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7169380154105595709}
+  m_Enabled: 1

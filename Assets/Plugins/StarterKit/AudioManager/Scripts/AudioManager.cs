@@ -66,6 +66,8 @@ namespace StarterKit.AudioManagerLib
                 CreateInstance.Create(nameof(AudioManager));
         }
         
+        [SerializeField]
+        private bool dontDestroyOnLoad = true;
         [SerializeField] 
         private AudioBank audioBank;
         [SerializeField]
@@ -127,7 +129,8 @@ namespace StarterKit.AudioManagerLib
                 return;
             }
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
         }
         
         private void OnDestroy()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace StarterKit.Common.FunctionStringLib
+namespace StarterKit.FunctionStringLib
 {
     /// <summary>
     /// Represents a key-value pair where the key is a string and the value is a Transform.

@@ -6,10 +6,12 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 #endif
 using StarterKit.AudioManagerLib;
+using StarterKit.Common;
 using StarterKit.FunctionStringLib;
+using StarterKit.FunctionStringLib.Function;
 using UnityEngine;
 
-namespace StarterKit.Common.FunctionStringLib
+namespace StarterKit.FunctionStringLib
 {
     public class FunctionString : MonoBehaviour
     {
@@ -29,6 +31,9 @@ namespace StarterKit.Common.FunctionStringLib
                 CreateInstance.Create(nameof(FunctionString));
             instance.ThisRun(functionString, inspectorValues, onComplete);
         }
+        
+        [SerializeField]
+        private bool dontDestroyOnLoad = true;
         
         [Header("Do Scale")] 
 #if ODIN_INSPECTOR
@@ -76,7 +81,8 @@ namespace StarterKit.Common.FunctionStringLib
                 return;
             }
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
         }
         
         private void OnDestroy()

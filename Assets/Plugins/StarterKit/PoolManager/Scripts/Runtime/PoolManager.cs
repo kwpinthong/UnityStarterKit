@@ -16,8 +16,12 @@ namespace StarterKit.PoolManagerLib
             return instance.ThisGetGameObject(prefab, active, position, rotation);
         }
 
-        [SerializeField] private ObjectPool poolPrefab;
-        [SerializeField] private List<ObjectPool> pools;
+        [SerializeField]
+        private bool dontDestroyOnLoad = true;
+        [SerializeField] 
+        private ObjectPool poolPrefab;
+        [SerializeField] 
+        private List<ObjectPool> pools;
 
         private void Awake()
         {
@@ -27,7 +31,8 @@ namespace StarterKit.PoolManagerLib
                 return;
             }
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
             pools = new List<ObjectPool>();
         }
         

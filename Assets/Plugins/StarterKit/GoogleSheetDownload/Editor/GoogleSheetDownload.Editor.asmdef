@@ -1,7 +1,9 @@
 {
-    "name": "StarterKit.Common.Editor",
+    "name": "GoogleSheetDownload.Editor",
     "rootNamespace": "",
-    "references": ["GUID:6696a426cfc1187418c24d857b382cf2"],
+    "references": [
+        "GUID:ad43cb2d806f68249a46376b971c8849"
+    ],
     "includePlatforms": [
         "Editor"
     ],

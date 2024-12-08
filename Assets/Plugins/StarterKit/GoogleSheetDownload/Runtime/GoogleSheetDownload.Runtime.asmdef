@@ -1,10 +1,11 @@
 {
-    "name": "StarterKit.Common.Editor",
+    "name": "GoogleSheetDownload.Runtime",
     "rootNamespace": "",
-    "references": ["GUID:6696a426cfc1187418c24d857b382cf2"],
-    "includePlatforms": [
-        "Editor"
+    "references": [
+        "GUID:e760ea07b9c912848a38c9f09661bd1f",
+        "GUID:6696a426cfc1187418c24d857b382cf2"
     ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

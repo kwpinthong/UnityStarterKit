@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StarterKit.Common.FunctionStringLib
+namespace StarterKit.FunctionStringLib
 {
     /// <summary>
     /// The FunctionKeeper class is responsible for managing and running functions based on a key.
