@@ -38,7 +38,7 @@ namespace StarterKit.LocalizeLib.Runtime
                 var info = new LocalizeData.Info
                 {
                     Code = code,
-                    Text = value
+                    Text = value.Replace("\"", "")
                 };
                 localizeData.LocalizeInfos.Add(info);
             }

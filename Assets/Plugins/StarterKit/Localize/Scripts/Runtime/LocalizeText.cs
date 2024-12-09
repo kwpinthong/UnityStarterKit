@@ -42,6 +42,22 @@ namespace StarterKit.LocalizeLib.Runtime
             database = AssetFinder.Find<LocalizeDatabase>("LocalizeDatabase");
         }
 
+        private void OnValidate()
+        {
+            if (database == null || database.Count == 0 || string.IsNullOrEmpty(key) || textTMP == null)
+                return;
+            
+            var localizeData = database.Find(x => x.Key == key);
+            if (localizeData == null)
+                return;
+            
+            var localizeInfo = localizeData.LocalizeInfos.Find(i => i.Code == "EN");
+            if (localizeInfo == null)
+                return;
+            
+            textTMP.text = localizeInfo.Text;
+        }
+
         private List<string> LocalizeCodeList()
         {
             var localizeList = new List<string>();

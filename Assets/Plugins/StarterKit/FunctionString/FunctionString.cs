@@ -92,32 +92,32 @@ namespace StarterKit.FunctionStringLib
         
         private void ThisRun(string functionString, List<FunctionInspectorValue> inspectorValues, Action onComplete)
         {
-            var function = functionString.Split(";").ToList();
-            function.RemoveAll(string.IsNullOrEmpty);
-            var key = function[0];
+            var functions = functionString.Split(";").ToList();
+            functions.RemoveAll(string.IsNullOrEmpty);
+            var key = functions[0];
             
             switch (key)
             {
                 case Key.DoFade:
                 {
-                    RunDoFade(function[1], inspectorValues, onComplete);
+                    RunDoFade(functions, inspectorValues, onComplete);
                     break;
                 }
                 case Key.DoScale:
                 {
-                    RunDoScale(function[1], inspectorValues, onComplete);
+                    RunDoScale(functions, inspectorValues, onComplete);
                     break;
                 }
                 case Key.PlayBGM:
                 {
-                    var bgmId = function[1];
+                    var bgmId = functions[1];
                     AudioManager.PlayBGM(bgmId);
                     onComplete?.Invoke();
                     break;
                 }
                 case Key.PlaySound:
                 {
-                    var soundId = function[1];
+                    var soundId = functions[1];
                     AudioManager.PlaySound(soundId);
                     onComplete?.Invoke();
                     break;
@@ -125,8 +125,9 @@ namespace StarterKit.FunctionStringLib
             }
         }
         
-        private void RunDoFade(string key, List<FunctionInspectorValue> inspectorValues, Action onComplete)
+        private void RunDoFade(List<string> functions, List<FunctionInspectorValue> inspectorValues, Action onComplete)
         {
+            var key = functions[1];
             var targetKey = inspectorValues.Find(x => x.Key == key).Value;
             if (targetKey == null)
             {
@@ -140,14 +141,15 @@ namespace StarterKit.FunctionStringLib
                 doFadeList.Add(doFade);
             }
             doFade.CanvasGroup = targetKey.GetComponent<CanvasGroup>();
-            doFade.Alpha = 0;
-            doFade.Duration = doFadeDuration;
-            doFade.Ease = doFadeEase;
+            doFade.Alpha = functions.Count >= 3 ? float.Parse(functions[2]) : 1;
+            doFade.Duration = functions.Count >= 4 ? float.Parse(functions[3]) : doFadeDuration;
+            doFade.Ease = functions.Count >= 5 ? (Ease)Enum.Parse(typeof(Ease), functions[4]) : doFadeEase;
             doFade.Run(onComplete);
         }
         
-        private void RunDoScale(string key, List<FunctionInspectorValue> inspectorValues, Action onComplete)
+        private void RunDoScale(List<string> functions, List<FunctionInspectorValue> inspectorValues, Action onComplete)
         {
+            var key = functions[1];
             var targetKey = inspectorValues.Find(x => x.Key == key).Value;
             if (targetKey == null)
             {
@@ -161,9 +163,9 @@ namespace StarterKit.FunctionStringLib
                 doScaleList.Add(doScale);
             }
             doScale.Transform = targetKey;
-            doScale.Scale = doScaleSize;
-            doScale.Duration = doScaleDuration;
-            doScale.Ease = doScaleEase;
+            doScale.Scale = functions.Count >= 3 ? float.Parse(functions[2]) : doScaleSize;
+            doScale.Duration = functions.Count >= 4 ? float.Parse(functions[3]) : doScaleDuration;
+            doScale.Ease = functions.Count >= 5 ? (Ease)Enum.Parse(typeof(Ease), functions[4]) : doScaleEase;
             doScale.Run(onComplete);
         }
         

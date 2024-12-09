@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterKit.Common;
 using StarterKit.FunctionStringLib;
 using UnityEngine;
 
@@ -16,22 +17,22 @@ namespace StarterKit.UIFarmworkLib
 
         protected virtual void PreOpen()
         {
-            Debug.Log("PreOpen");
+            //CommonDebug.Log("PreOpen");
         }
         
         protected virtual void PostOpen()
         {
-            Debug.Log("PostOpen");
+            //CommonDebug.Log("PostOpen");
         }
         
         protected virtual void PreClose()
         {
-            Debug.Log("PerClose");
+            //CommonDebug.Log("PerClose");
         }
         
         protected virtual void PostClose()
         {
-            Debug.Log("PostClose");
+            //CommonDebug.Log("PostClose");
         }
         
 #if ODIN_INSPECTOR
@@ -39,7 +40,7 @@ namespace StarterKit.UIFarmworkLib
 #else
         [ContextMenu("Open")]
 #endif
-        public void Open()
+        public virtual void Open()
         {
             if (Application.isPlaying)
             {
@@ -63,7 +64,7 @@ namespace StarterKit.UIFarmworkLib
 #else
         [ContextMenu("Close")]
 #endif
-        public void Close()
+        public virtual void Close()
         {
             if (Application.isPlaying)
             {
