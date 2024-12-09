@@ -1,4 +1,4 @@
-namespace StarterKit.Localize.Runtime
+namespace StarterKit.LocalizeLib.Runtime
 {
     public static class LocalizeCodeGen
     {

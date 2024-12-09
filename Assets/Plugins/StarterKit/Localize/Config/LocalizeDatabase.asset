@@ -16,3 +16,4 @@ MonoBehaviour:
   sheetID: 
   enties: []
   localizeCodeGen: {fileID: 11500000, guid: 0305b6a1cf0ee9e4bb756d9a336a285c, type: 3}
+  localizeCodeGenNamespace: StarterKit.LocalizeLib.Runtime

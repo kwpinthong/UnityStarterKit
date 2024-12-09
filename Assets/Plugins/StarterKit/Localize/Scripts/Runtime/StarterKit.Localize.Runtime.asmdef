@@ -1,4 +1,20 @@
 {
-	"name": "StarterKit.Localize.Runtime",
-	"references":[ "GUID:6696a426cfc1187418c24d857b382cf2", "GUID:622f9b408a1a1a641a701e6a370d4f48", "GUID:e760ea07b9c912848a38c9f09661bd1f" ]
+    "name": "StarterKit.Localize.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6696a426cfc1187418c24d857b382cf2",
+        "GUID:622f9b408a1a1a641a701e6a370d4f48",
+        "GUID:e760ea07b9c912848a38c9f09661bd1f",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:ad43cb2d806f68249a46376b971c8849"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -32,6 +32,9 @@ namespace StarterKit.Common.Editor
 
         [MenuItem("StartKit/Create/Pool Manager")]
         public static void CreatePoolManagerPrefabVar() => CreatePrefab("PoolManager");
+        
+        [MenuItem("StartKit/Create/Localize")]
+        public static void CreateLocalizePrefabVar() => CreatePrefab("Localize");
 
         private static void CreatePrefab(string prefabName)
         {

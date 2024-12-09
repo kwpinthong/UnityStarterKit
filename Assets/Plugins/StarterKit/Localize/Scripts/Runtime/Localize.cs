@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using StarterKit.Common;
+using StarterKit.LocalizeLib.Runtime;
 using UnityEngine;
 
-namespace StarterKit.Localize.Runtime
+namespace StarterKit.LocalizeLib.Runtime
 {
     public class Localize : MonoBehaviour
     {
@@ -39,13 +40,24 @@ namespace StarterKit.Localize.Runtime
         }
         
         [SerializeField]
-        private List<LocalizeData> localizeData;
+        private LocalizeDatabase database;
         
         [SerializeField]
-        private List<LocalizeData> cacheData;
+        private List<LocalizeData> cacheLocalizeData;
         
         private string ThisGetLocalizeText(string key, string localizeCode)
         {
+            var data = cacheLocalizeData.Find(i => i.Key == key);
+            if (data != null)
+            {
+                return data.LocalizeInfos.Find(info => info.Code == localizeCode).Text;
+            }
+            data = database.Find(i => i.Key == key);
+            if (data != null)
+            {
+                cacheLocalizeData.Add(data);
+                return data.LocalizeInfos.Find(info => info.Code == localizeCode).Text;
+            }
             return key;
         }
     }

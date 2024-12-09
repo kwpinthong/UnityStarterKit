@@ -8,7 +8,7 @@ using GoogleSheetDownload.Editor.Data;
 using UnityEditor;
 #endif
 using GoogleSheetDownload.Runtime;
-using StarterKit.Localize.Runtime;
+using StarterKit.LocalizeLib.Runtime;
 using UnityEngine;
 
 namespace StarterKit.LocalizeLib.Runtime
@@ -19,6 +19,8 @@ namespace StarterKit.LocalizeLib.Runtime
 #if UNITY_EDITOR
         [SerializeField] 
         private TextAsset localizeCodeGen;
+        [SerializeField]
+        private string localizeCodeGenNamespace = "StarterKit.LocalizeLib.Runtime";
 
         protected override void DownloadDatabase()
         {
@@ -30,7 +32,7 @@ namespace StarterKit.LocalizeLib.Runtime
         {
             var localizeData = new LocalizeData();
             localizeData.Key = sheetRowData.GetString("Key");
-            foreach (var code in Localize.Runtime.Localize.CodeList)
+            foreach (var code in LocalizeLib.Runtime.Localize.CodeList)
             {
                 var value = sheetRowData.GetString(code);
                 var info = new LocalizeData.Info
@@ -48,7 +50,7 @@ namespace StarterKit.LocalizeLib.Runtime
             if (localizeCodeGen == null) return;
 
             var sb = new StringBuilder();
-            sb.AppendLine("namespace StarterKit.Localize.Runtime");
+            sb.AppendLine($"namespace {localizeCodeGenNamespace}");
             sb.AppendLine("{");
             sb.AppendLine("    public static class LocalizeCodeGen");
             sb.AppendLine("    {");

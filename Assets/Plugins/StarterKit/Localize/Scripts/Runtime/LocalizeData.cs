@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace StarterKit.Localize.Runtime
+namespace StarterKit.LocalizeLib.Runtime
 {
     [System.Serializable]
     public class LocalizeData
