@@ -1,4 +1,18 @@
 {
-	"name": "StarterKit.UIFarmwork.Runtime",
-	"references":[ "StarterKit.FunctionString.Runtime", "StarterKit.Common.Runtime" ]
+    "name": "StarterKit.UIFarmwork.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "StarterKit.FunctionString.Runtime",
+        "StarterKit.Common.Runtime",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

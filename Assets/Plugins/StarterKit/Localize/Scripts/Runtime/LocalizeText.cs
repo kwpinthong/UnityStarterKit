@@ -29,7 +29,7 @@ namespace StarterKit.LocalizeLib.Runtime
         {
             if (string.IsNullOrEmpty(key))
             {
-                CommonDebug.LogError("LocalzieKey is empty", gameObject);
+                CommonDebug.LogWarning("LocalzieKey is empty", gameObject);
                 return;
             }
             textTMP.text = Localize.GetLocalizeText(key);

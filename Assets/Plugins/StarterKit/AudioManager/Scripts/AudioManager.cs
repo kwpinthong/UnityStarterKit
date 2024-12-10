@@ -10,6 +10,36 @@ namespace StarterKit.AudioManagerLib
     {
         private static AudioManager instance;
         
+        public static float MasterVolume
+        {
+            get => PlayerPrefs.GetFloat(instance.GetPath(MasterVolumeKey), 1f);
+            set => PlayerPrefs.SetFloat(instance.GetPath(MasterVolumeKey), value);
+        }
+
+        public static float BGMVolume
+        {
+            get => PlayerPrefs.GetFloat(instance.GetPath(BGMVolumeKey), 1f);
+            set => PlayerPrefs.SetFloat(instance.GetPath(BGMVolumeKey), value);
+        }
+        
+        public static float SFXVolume
+        {
+            get => PlayerPrefs.GetFloat(instance.GetPath(SFXVolumeKey), 1f);
+            set => PlayerPrefs.SetFloat(instance.GetPath(SFXVolumeKey), value);
+        }
+        
+        public static bool DoBGMMute
+        {
+            get => PlayerPrefs.GetInt(instance.GetPath(DoBGMMuteKey), 0) == 1;
+            set => PlayerPrefs.SetInt(instance.GetPath(DoBGMMuteKey), value ? 1 : 0);
+        }
+        
+        public static bool DoSFXMute
+        {
+            get => PlayerPrefs.GetInt(instance.GetPath(DoSFXMuteKey), 0) == 1;
+            set => PlayerPrefs.SetInt(instance.GetPath(DoSFXMuteKey), value ? 1 : 0);
+        }
+        
         public static void PlayBGM(string bgmId)
         {
             EnsureCreateInstance();
@@ -22,41 +52,41 @@ namespace StarterKit.AudioManagerLib
             instance.ThisPlaySound(soundId);
         }
         
-        public static bool IsBGMMute => instance.DoBGMMute;
-        
-        public static bool IsSFXMute => instance.DoSFXMute;
+        public static void SetMasterVolume(float volume)
+        { 
+            MasterVolume = volume;
+            SetVolume(instance.adioMixerMasterParmName, volume);
+        }
 
         public static void SetBGMVolume(float volume)
-        {
-            instance.BGMVolume = volume;
+        { 
+            BGMVolume = volume;
             SetVolume(instance.adioMixerBGMParmName, volume);
         }
 
-        public static void SetSoundVolume(float volume)
-        {
-            instance.SFXVolume = volume;
+        public static void SetSFXVolume(float volume)
+        { 
+            SFXVolume = volume;
             SetVolume(instance.adioMixerSFXParmName, volume);
         }
 
         public static void MuteBGM(bool isMute)
-        {
-            instance.DoBGMMute = isMute;
-            SetVolume(instance.adioMixerBGMParmName, isMute ? 0f : instance.BGMVolume);
+        { 
+            DoBGMMute = isMute;
+            SetVolume(instance.adioMixerBGMParmName, isMute ? 0f : BGMVolume);
         }
 
         public static void MuteSound(bool isMute)
-        {
-            instance.DoSFXMute = isMute;
-            SetVolume(instance.adioMixerSFXParmName, isMute ? 0f : instance.SFXVolume);
+        { 
+            DoSFXMute = isMute;
+            SetVolume(instance.adioMixerSFXParmName, isMute ? 0f : SFXVolume);
         }
         
         private static void SetVolume(string paramName, float volumeLevel)
         {
             EnsureCreateInstance();
-            
             var finalVolume = Mathf.Clamp(volumeLevel, 0.0001f, 1f);
             var volume = Mathf.Log10(finalVolume) * 20;
-            
             instance.audioMixer.SetFloat(paramName, volume);
         }
         
@@ -77,6 +107,8 @@ namespace StarterKit.AudioManagerLib
         [SerializeField]
         private AudioMixer audioMixer;
         [SerializeField]
+        private string adioMixerMasterParmName = "Master";
+        [SerializeField]
         private string adioMixerBGMParmName = "BGM";
         [SerializeField]
         private string adioMixerSFXParmName = "SFX";
@@ -90,36 +122,13 @@ namespace StarterKit.AudioManagerLib
         private List<AudioSource> sfxSources = new List<AudioSource>();
 
         private const string PlayerPrefsPath = "StarterKit/AudioManager";
+        private const string MasterVolumeKey = "MasterVolume";
         private const string BGMVolumeKey = "BGMVolume";
         private const string SFXVolumeKey = "SFXVolume";
         private const string DoBGMMuteKey = "DoBGMMute";
         private const string DoSFXMuteKey = "DoSFXMute";
 
         private string GetPath(string key) => $"{PlayerPrefsPath}/{key}";
-
-        private float BGMVolume
-        {
-            get => PlayerPrefs.GetFloat(GetPath(BGMVolumeKey), 1f);
-            set => PlayerPrefs.SetFloat(GetPath(BGMVolumeKey), value);
-        }
-        
-        private float SFXVolume
-        {
-            get => PlayerPrefs.GetFloat(GetPath(SFXVolumeKey), 1f);
-            set => PlayerPrefs.SetFloat(GetPath(SFXVolumeKey), value);
-        }
-        
-        private bool DoBGMMute
-        {
-            get => PlayerPrefs.GetInt(GetPath(DoBGMMuteKey), 0) == 1;
-            set => PlayerPrefs.SetInt(GetPath(DoBGMMuteKey), value ? 1 : 0);
-        }
-        
-        private bool DoSFXMute
-        {
-            get => PlayerPrefs.GetInt(GetPath(DoSFXMuteKey), 0) == 1;
-            set => PlayerPrefs.SetInt(GetPath(DoSFXMuteKey), value ? 1 : 0);
-        }
         
         private void Awake()
         {
