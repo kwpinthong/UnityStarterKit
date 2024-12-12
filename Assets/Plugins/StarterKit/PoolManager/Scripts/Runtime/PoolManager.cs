@@ -13,7 +13,14 @@ namespace StarterKit.PoolManagerLib
         {
             if (instance == null)
                 CreateInstance.Create("PoolManager");
-            return instance.ThisGetGameObject(prefab, active, position, rotation);
+            return instance.ThisGetGameObject(prefab, null, active, position, rotation);
+        }
+        
+        public static GameObject GetGameObject(GameObject prefab, Transform root, bool active = true, Vector3 position = default, Quaternion rotation = default)
+        {
+            if (instance == null)
+                CreateInstance.Create("PoolManager");
+            return instance.ThisGetGameObject(prefab, root, active, position, rotation);
         }
 
         [SerializeField]
@@ -41,12 +48,12 @@ namespace StarterKit.PoolManagerLib
             instance = null;
         }
         
-        private GameObject ThisGetGameObject(GameObject prefab, bool active, Vector3 position, Quaternion rotation)
+        private GameObject ThisGetGameObject(GameObject prefab, Transform root, bool active, Vector3 position, Quaternion rotation)
         {
             var pool = pools.Find(p => p.Id == prefab.name);
             if (pool == null)
             {
-                pool = Instantiate(poolPrefab, transform);
+                pool = Instantiate(poolPrefab, root == null ? transform : root);
                 pool.Setup(prefab);
                 pools.Add(pool);
             }
